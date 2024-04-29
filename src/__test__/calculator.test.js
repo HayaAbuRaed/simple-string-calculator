@@ -37,9 +37,9 @@ describe("Calculator", () => {
   });
 
   // Test case: Order of operations
-  // it("should follow the correct order of operations", () => {
-  //   expect(calc(2, "+", 3, "*", 4)).toBe(14);
-  // });
+  it("should follow the correct order of operations", () => {
+    expect(calc(2, "+", 3, "*", 4)).toBe(14);
+  });
 
   // Test case: Invalid operator
   it("should throw an error for an invalid operator", () => {
@@ -50,4 +50,16 @@ describe("Calculator", () => {
   it("should throw an error for invalid input types", () => {
     expect(() => calc("2", "+", 3)).toThrow("Invalid input type");
   });
+
+  // Test case: One argument
+  it("should return the number if there is only one number argument", () => {
+    expect(calc(5)).toBe(5);
+  });
+
+  // Test case: Missing arguments
+  it("should throw an error for missing arguments", () => {
+    expect(() => calc(2, "+")).toThrow("Invalid input");
+  });
+
+  
 });
