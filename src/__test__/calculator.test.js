@@ -1,5 +1,4 @@
-// calculator.test.js
-import calc from "../calculator.js";
+const calc = require("../calculator");
 
 describe("Calculator", () => {
   // Test case: Addition
@@ -50,5 +49,35 @@ describe("Calculator", () => {
   // Test case: Invalid input type
   it("should throw an error for invalid input types", () => {
     expect(() => calc("2", "+", 3)).toThrow("Invalid input type");
+  });
+
+  // Test case: No arguments
+  it("should throw an error for no arguments", () => {
+    expect(() => calc()).toThrow("Invalid input");
+  });
+
+  // Test case: One argument
+  it("should return the number if there is only one number argument", () => {
+    expect(calc(5)).toBe(5);
+  });
+
+  // Test case: Missing arguments
+  it("should throw an error for missing arguments", () => {
+    expect(() => calc(2, "+")).toThrow("Invalid input");
+  });
+
+  // Test case: Ignore numbers greater than 1000
+  it("should ignore numbers greater than 1000", () => {
+    expect(calc(1001, "/", 100, "*", 1002, "+", 1003)).toBe(100);
+  });
+
+  // Test case: No numbers less than 1000
+  it("should ignore numbers greater than 1000", () => {
+    expect(calc(1001, "+", 1002, "+", 1003, "*", 1004, "+", 1005)).toBe(0);
+  });
+
+  // Test case: Maintain the original sign when ignoring numbers greater than 1000
+  it("should maintain the original sign when ignoring numbers greater than 1000", () => {
+    expect(calc(1001, "-", 5)).toBe(5);
   });
 });
