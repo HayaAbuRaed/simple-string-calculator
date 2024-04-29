@@ -35,8 +35,8 @@ Install dependencies:
 ## ✨ Have a Look
 Running: ``` npm test ``` we get:
 <p align="center">
-  <img src="https://github.com/HayaAbuRaed/simple-string-calculator/assets/123592435/ba3c1c7d-d506-4228-952c-e1912c637ff7" width="450" alt="vs-coverage" /> &nbsp; &nbsp; &nbsp; &nbsp;
-  <img src="https://github.com/HayaAbuRaed/simple-string-calculator/assets/123592435/b0eb39e9-42ab-4550-bd8f-38c4d66a1ccd" width="450" alt="coverage" />
+  <img src="https://github.com/HayaAbuRaed/simple-string-calculator/assets/123592435/ba3c1c7d-d506-4228-952c-e1912c637ff7" width="350" alt="vs-coverage" /> &nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="https://github.com/HayaAbuRaed/simple-string-calculator/assets/123592435/b0eb39e9-42ab-4550-bd8f-38c4d66a1ccd" width="350" alt="coverage" />
 </p>
 
 <br /> <br /> <br />
