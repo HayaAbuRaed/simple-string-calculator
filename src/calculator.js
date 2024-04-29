@@ -13,25 +13,34 @@ const calc = (...args) => {
     throw new Error("Invalid input type");
 
   while (operators.includes("*") || operators.includes("/")) {
-    let operatorIndex =
-      operators.indexOf("*") > -1 ? operators.indexOf("*") : numbers.length;
-    let operator = "";
+    const productIndex = operators.indexOf("*");
+    const divisionIndex = operators.indexOf("/");
 
-    if (operators.indexOf("/") + 1 && operators.indexOf("/") < operatorIndex)
-      operatorIndex = operators.indexOf("/");
+    let operatorIndex = productIndex > -1 ? productIndex : operators.length;
 
-    operator = operators[operatorIndex];
+    if (divisionIndex + 1 && divisionIndex < operatorIndex)
+      operatorIndex = divisionIndex;
 
-    if (operatorIndex === -1) break;
+    const operator = operators[operatorIndex];
 
-    if (operator === "*") {
-      numbers[operatorIndex] *= numbers[operatorIndex + 1];
-    } else {
-      if (numbers[operatorIndex + 1] === 0) {
-        throw new Error("Division by zero");
+    const firstOperand = numbers[operatorIndex];
+    const secondOperand = numbers[operatorIndex + 1];
+
+    if (firstOperand > 1000 && secondOperand > 1000) {
+      numbers.splice(operatorIndex, 2);
+      operators.splice(operatorIndex, 1);
+      continue;
+    } else if (firstOperand > 1000) numbers[operatorIndex] = secondOperand;
+    else if (secondOperand > 1000);
+    else {
+      if (operator === "*")
+        numbers[operatorIndex] *= numbers[operatorIndex + 1];
+      else {
+        if (numbers[operatorIndex + 1] === 0)
+          throw new Error("Division by zero");
+
+        numbers[operatorIndex] /= numbers[operatorIndex + 1];
       }
-
-      numbers[operatorIndex] /= numbers[operatorIndex + 1];
     }
 
     numbers.splice(operatorIndex + 1, 1);
@@ -41,15 +50,23 @@ const calc = (...args) => {
   while (operators.length) {
     const operator = operators.shift();
 
-    if (operator === "+") numbers[0] += numbers[1];
-    else if (operator === "-") numbers[0] -= numbers[1];
-    else throw new Error("Invalid operator");
+    if (!numbers[1]) numbers[1] = 0; // to handle the case when the first operations omit all other operands
+
+    if (numbers[0] > 1000 && numbers[1] > 1000) {
+      numbers.splice(0, 2);
+      continue;
+    } else if (numbers[0] > 1000) numbers[0] = numbers[1];
+    else if (numbers[1] > 1000);
+    else {
+      if (operator === "+") numbers[0] += numbers[1];
+      else if (operator === "-") numbers[0] -= numbers[1];
+      else throw new Error("Invalid operator");
+    }
 
     numbers.splice(1, 1);
   }
 
-  console.log(numbers[0]);
-  return numbers[0];
+  return numbers[0] ? numbers[0] : 0;
 };
 
 module.exports = calc;
