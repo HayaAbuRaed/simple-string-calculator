@@ -1,6 +1,4 @@
-const calc = (...args) => {
-  if (args.length === 0) throw new Error("Invalid input");
-
+const separateOpsAndNums = (args) => {
   const operators = args.filter((arg, index) => index % 2 !== 0);
   const numbers = args.filter((arg, index) => index % 2 === 0);
 
@@ -12,6 +10,10 @@ const calc = (...args) => {
   )
     throw new Error("Invalid input type");
 
+  return { operators, numbers };
+};
+
+const calcStrongOps = (operators, numbers) => {
   while (operators.includes("*") || operators.includes("/")) {
     const productIndex = operators.indexOf("*");
     const divisionIndex = operators.indexOf("/");
@@ -46,7 +48,9 @@ const calc = (...args) => {
     numbers.splice(operatorIndex + 1, 1);
     operators.splice(operatorIndex, 1);
   }
+};
 
+const calcRestOps = (operators, numbers) => {
   while (operators.length) {
     const operator = operators.shift();
 
@@ -65,6 +69,16 @@ const calc = (...args) => {
 
     numbers.splice(1, 1);
   }
+};
+
+const calc = (...args) => {
+  if (args.length === 0) throw new Error("Invalid input");
+
+  const { operators, numbers } = separateOpsAndNums(args);
+
+  calcStrongOps(operators, numbers);
+
+  operators.length && calcRestOps(operators, numbers);
 
   return numbers[0] ? numbers[0] : 0;
 };
